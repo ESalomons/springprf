@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="AccountManagement" />
+		<property name="service" ref="accountManagement" />
+		<property name="serviceInterface"
+			value="springTutorial.services.interfaces.AccountManagement" />
+	</bean>
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="BalanceManagement" />
+		<property name="service" ref="balanceManagement" />
+		<property name="serviceInterface"
+			value="springTutorial.services.interfaces.BalanceManagement" />
+	</bean>
+	<bean name="/MoneyManagement" class="org.springframework.remoting.rmi.RmiServiceExporter">
+		<property name="serviceName" value="MoneyManagement" />
+		<property name="service" ref="moneyManagement" />
+		<property name="serviceInterface"
+			value="springTutorial.services.interfaces.MoneyManagement" />
+	</bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="client7" class="springTutorial.client.Client7">
+		<property name="accountManagement" ref="accountManagement"/>
+		<property name="balanceManagement" ref="balanceManagement"/>
+		<property name="moneyManagement" ref="moneyManagement"/>
+	</bean>
+	
+	<bean id="accountManagement" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1099/AccountManagement"/>
+		<property name="serviceInterface" value="springTutorial.services.interfaces.AccountManagement"/>
+	</bean>
+
+	<bean id="balanceManagement" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1099/BalanceManagement"/>
+		<property name="serviceInterface" value="springTutorial.services.interfaces.BalanceManagement"/>
+	</bean>
+
+	<bean id="moneyManagement" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1099/MoneyManagement"/>
+		<property name="serviceInterface" value="springTutorial.services.interfaces.MoneyManagement"/>
+	</bean>
+	
+</beans>

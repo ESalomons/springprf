@@ -1,0 +1,36 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'nl.saxion.springtutorial'
+version = '1-RELEASE'
+
+description = """"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.apache.maven.plugins', name: 'maven-resources-plugin', version:'2.4.3'
+    compile group: 'org.hibernate', name: 'hibernate-core', version:'4.1.9.Final'
+    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version:'4.1.9.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version:'4.3.1.Final'
+    compile group: 'org.springframework', name: 'spring-context', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-test', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-orm', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-webmvc', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-web', version:'3.1.0.RELEASE'
+    compile group: 'org.springframework', name: 'spring-aop', version:'3.1.0.RELEASE'
+    compile group: 'org.aspectj', name: 'aspectjrt', version:'1.6.11'
+    compile group: 'org.aspectj', name: 'aspectjtools', version:'1.6.11'
+    compile group: 'org.hsqldb', name: 'hsqldb', version:'2.2.8'
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version:'1.4'
+    compile group: 'junit', name: 'junit', version:'4.10'
+    compile group: 'org.quartz-scheduler', name: 'quartz', version:'2.1.6'
+}

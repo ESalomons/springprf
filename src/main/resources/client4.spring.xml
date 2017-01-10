@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
+	<!-- Tutorial 3 specifics -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="stSessionFactory" />
+	</bean>
+	<bean id="accountManagement"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager" ref="txManager" />
+		<property name="target">
+			<bean class="springTutorial.services.implementations.AccountManagementImpl">
+				<property name="accountDAO">
+					<ref bean="accountDAO" />
+				</property>
+			</bean>
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRES_NEW</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- Hibernate settings -->
+	<bean id="stDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="url" value="jdbc:hsqldb:hsql://localhost/springTutDatabase" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+	<bean id="stSessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="stDataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>springTutorial/dao/hibernateDaos/bank.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- Daos -->
+	<bean id="accountDAO" class="springTutorial.dao.hibernateDaos.AccountDAOImpl">
+		<property name="sessionFactory" ref="stSessionFactory" />
+	</bean>
+	<bean id="balanceUpdateDAO" class="springTutorial.dao.jdbcDaos.BalanceUpdateDAOImpl">
+		<property name="dataSource" ref="stDataSource" />
+	</bean>
+	<bean id="moneyTransactionDAO"
+		class="springTutorial.dao.hibernateDaos.MoneyTransactionDAOImpl">
+		<property name="sessionFactory" ref="stSessionFactory" />
+	</bean>
+	
+	<!-- Services -->
+	<bean id="balanceManagement"
+		class="springTutorial.services.implementations.BalanceManagementImpl">
+		<property name="accountDAO">
+			<ref bean="accountDAO" />
+		</property>
+		<property name="balanceUpdateDAO">
+			<ref bean="balanceUpdateDAO" />
+		</property>
+	</bean>
+	<bean id="moneyManagement"
+		class="springTutorial.services.implementations.MoneyManagementImpl">
+		<property name="accountDAO">
+			<ref bean="accountDAO" />
+		</property>
+		<property name="moneyTransactionDAO">
+			<ref bean="moneyTransactionDAO" />
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/tx 
+                           http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+                           http://www.springframework.org/schema/aop 
+                           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+                           http://www.springframework.org/schema/context
+						   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	
+	<bean id="client" class="springTutorial.client.Client5">
+		<property name="accountService" ref="accountManagement" />
+		<property name="balanceService" ref="balanceManagement" />
+		<property name="moneyService" ref="moneyManagement" />
+	</bean>
+
+	<!-- Tutorial 5: aspects -->
+	<bean id="timertje" class="springTutorial.aspect.MethodTimer" />
+	<!-- Extra aspects om te klooien -->
+	<bean id="klooier" class="springTutorial.aspect.KlooiInterceptor" />
+
+	<aop:config>
+<!--
+		<aop:aspect id="timerAspect" ref="timertje">
+			<aop:pointcut id="myPointCut" expression="bean(*Management)" />
+			<aop:around pointcut-ref="myPointCut" method="timeMethod" />
+		</aop:aspect>
+ 
+
+		<aop:aspect id="klooiAspect" ref="klooier">
+			<aop:pointcut id="klooiPointCut"
+				expression="execution(* springTutorial.services.implementations.AccountManagementImpl.createAccount(..))" />
+			<aop:around pointcut-ref="klooiPointCut" method="klooi" />
+		</aop:aspect>
+-->	
+	</aop:config>
+ 
+
+
+</beans>
