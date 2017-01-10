@@ -28,6 +28,7 @@ public class Client1 {
 			accountService.createAccount("Jan");
 			accountService.createAccount("Piet");
 			accountService.createAccount("Henk");
+			accountService.createAccount("Kees");
 		} catch (AccountNameInUseException e) {
 			System.err.println("account in use");
 		}
