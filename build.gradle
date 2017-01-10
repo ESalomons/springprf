@@ -11,6 +11,9 @@ sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
 
+findbugs{
+    ignoreFailures = true
+}
 
 repositories {
         
