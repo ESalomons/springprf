@@ -2,3 +2,8 @@
 /tutorialDatabase.tmp
 *.class
 springTutDatabase
+main.html
+/.idea/
+/.settings/
+/.gradle/
+/build/
